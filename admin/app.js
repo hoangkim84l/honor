@@ -9,12 +9,17 @@ var usersRouter = require('./routes/users');
 var contactRouter = require('./routes/contact');
 var topicRouter = require('./routes/topic');
 
-//connect mongoDB
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/testnodejs", { useNewUrlParser: true });
-
 var bodyParser = require('body-parser');
+
+//connect mongodb
+var mongoose = require('mongoose');
+var db_url = 'mongodb://localhost:27017/testnodejs';
+var mongoDB = process.env.MONGODB_URI || db_url;
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'mongoDB not connect'));
 
 var app = express();
 
@@ -37,6 +42,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/contact', contactRouter);
 app.use('/topic', topicRouter);
+ 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
