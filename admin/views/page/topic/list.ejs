@@ -11,7 +11,16 @@
         <div class="row">
             <div class="col-sm-12">
                 <h4>Thêm topic mới</h4>
-                <form action="/add" name="forma" method="POST">                    
+                <form action="/topic/topic_create" name="forma" method="post"> 
+                    <div class="form-group">
+                        <label for="User">Name User</label>
+                        <select class="selectpicker form-control" name="user_name">
+                            <option>Select...</option>
+                            <% results.forEach(function(username){   %>
+                            <option value="<%= username.name %>"><%= username.name %></option>
+                            <% }); %>    
+                        </select>   
+                    </div>                   
                     <div class="form-group">
                         <label for="exampleInputEmail">Title</label>
                         <input type="text" class="form-control" name="title" id="title" placeholder="title">
@@ -19,6 +28,10 @@
                     <div class="form-group">
                         <label for="content">Content</label>
                         <input type="text" class="form-control" id="content" name="content" aria-describedby="emailHelp" placeholder="content">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Date</label>
+                        <input type="date" class="form-control" id="date" name="date">
                     </div>
                     <div class="form-group">
                         <label for="examplestatus">Status</label><br/>
@@ -31,15 +44,32 @@
             </div>
             <br>
             <h5>Danh sách topic</h5>
-            <div class="col-sm-4">
-                aaa
-            </div>
-            <div class="col-sm-4">
-                    aaa
-            </div>
-            <div class="col-sm-4">
-                aaa
-            </div>
+            <h4>Danh Sách User</h4>
+            <table class="table col-sm-12">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% $j=1;
+                   result.forEach(function(item){  %>  
+                <tr>
+                    <th scope="row"><%= $j++ %></th>
+                    <td><%= item.user_name %></td>
+                    <td><%= item.title %></td>
+                    <td><%= item.content %></td>
+                    <td><%= item.date %></td>
+                    <td><% if(item.status == 1){ %>  <span>Hiển thị</span> <% }else{ %> <span>Ẩn</span> <% } %>  </td>
+                </tr>
+                <% });%>
+                </tbody>
+            </table>
         </div>
     </main>
     <footer>
