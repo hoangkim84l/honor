@@ -3,26 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var contactRouter = require('./routes/contact');
-var topicRouter = require('./routes/topic');
-
 var bodyParser = require('body-parser');
 
-//connect mongodb
-var mongoose = require('mongoose');
-var db_url = 'mongodb://localhost:27017/testnodejs';
-var mongoDB = process.env.MONGODB_URI || db_url;
-mongoose.connect(mongoDB);
-mongoose.Promise = global.Promise;
-var db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'mongoDB not connect'));
+
 
 var app = express();
-
+console.log(app);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -37,12 +24,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//connect mongodb
+var db = require('./models/db.config');
+db.initialize();
+
 //router
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/contact', contactRouter);
-app.use('/topic', topicRouter);
- 
+ var routeConfig = require('./controllers/route.config');
+ routeConfig.initialize(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

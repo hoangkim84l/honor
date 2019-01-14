@@ -1,10 +1,8 @@
-const User = require('../models/user.model');
-//test validate
-exports.test = function(req, res){
-    res.send('oh yeah qua dc');
-};
+var userRepository = require('../repositories/user.repository');
+
 //add new user
 exports.user_create = function(req, res){
+    userRepository.CreateUser(req.body);
     var user = new User(
         {
             name : req.body.name,
