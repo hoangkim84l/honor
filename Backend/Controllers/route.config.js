@@ -1,8 +1,8 @@
 
-var indexRouter = require('./index');
-var usersRouter = require('./users');
-var contactRouter = require('./contact');
-var topicRouter = require('./topic');
+// var indexRouter = require('../routes/index');
+// var usersRouter = require('../routes/users');
+// var contactRouter = require('../routes/contact');
+// var topicRouter = require('../routes/topic');
 
 
 function _initialize(appExpress){
@@ -10,7 +10,7 @@ function _initialize(appExpress){
     // appExpress.use('/users', usersRouter);
     // appExpress.use('/contact', contactRouter);
     // appExpress.use('/topic', topicRouter);
-    appExpress.use('/product',require('./product'))
+    appExpress.use('/product',require('./ProductController'));
 }
 
 module.exports = {

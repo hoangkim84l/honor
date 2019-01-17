@@ -3,11 +3,12 @@ var router = express.Router();
 
 
 
-function GetProducts(){
+function GetProducts(req, res){
 
 }
 
 
 router.get('/',GetProducts);
+
 
 exports = ProductController;

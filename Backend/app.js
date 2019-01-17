@@ -6,10 +6,9 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 
-
-
 var app = express();
-console.log(app);
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -29,7 +28,7 @@ var db = require('./models/db.config');
 db.initialize();
 
 //router
- var routeConfig = require('./routes/route.config');
+ var routeConfig = require('./Controllers/route.config');
  routeConfig.initialize(app);
 
 // catch 404 and forward to error handler
