@@ -7,7 +7,7 @@ async function GetProducts(req, res){
 }
 
 async function GetProductDetail(req, res){
-    res.send("AAAAA"); 
+    res.send(await ProductRepo.GetProductDetail()); 
 }
 
 async function CreateProduct(req, res){
@@ -21,6 +21,6 @@ var ProductController = new BaseController({
 ProductController
     .GET('/',GetProducts)
     .POST('/',CreateProduct)
-    .GET('/:productId',GetProductDetail);
+    .GET('/:productName',GetProductDetail);
 
 module.exports = ProductController;

@@ -18,8 +18,14 @@ async function GetProducts(){
     return await ProductDAL.GetProducts();   
 }
 
+//get productDetail by id
+async function GetProductDetail(productName){
+	return await ProductDAL.GetProductDetail(productName);
+
+}
 
 module.exports = {
     CreateProduct : CreateProduct,
-    GetProducts : GetProducts 
+    GetProducts : GetProducts,
+    GetProductDetail : GetProductDetail 
 }

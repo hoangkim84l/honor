@@ -10,7 +10,11 @@ async function GetProducts(){
     return await Product.find();
 }
 
+async function GetProductDetail(productName){
+	return await Product.find({productName : productName});
+}
 module.exports = {
     CreateProduct : CreateProduct,
     GetProducts : GetProducts,
+    GetProductDetail : GetProductDetail,
 }
