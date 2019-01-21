@@ -6,8 +6,8 @@ async function GetProducts(req, res){
     res.send(await ProductRepo.GetProducts());      
 }
 
-async function GetProductDetail(req, res){
-    res.send(await ProductRepo.GetProductDetail()); 
+async function GetProductDetail(res){
+    res.send(await ProductRepo.GetProductDetail(productName)); 
 }
 
 async function CreateProduct(req, res){
