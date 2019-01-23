@@ -10,8 +10,8 @@ async function CreateProduct(userId, product){
     // var newProduct = new Product({
     //     productName :product.productName,  
     // }); 
-    
-    return await ProductDAL.CreateProduct(product);
+    var newProduct = await ProductDAL.CreateProduct(product);
+    return newProduct; 
 }
 
 async function GetProducts(){
