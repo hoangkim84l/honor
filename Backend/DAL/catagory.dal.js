@@ -1,15 +1,6 @@
-var db = require('mongoose').connection;
-var Catagory = ('../models/private/catagory.model');
-var CatagoryCollection = db.collection("Catagories");
 
-async function CreateCaragory($catagory){
-	return await Catagory.create(catagory);
-}
-async function GetCatagory(){
-	return await Catagory.find();
-}
+var Catagory = require('../models/private/catagory.model');
+var BaseDAL = require('./base.dal'); 
+var CatagoryDAL = new BaseDAL("Catagory",Catagory);
 
-module.exports = {
-	CreateCaragory : CreateCaragory,
-	GetCatagory : GetCatagory,
-}
+module.exports = CatagoryDAL;

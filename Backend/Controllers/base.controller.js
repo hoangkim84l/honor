@@ -29,17 +29,6 @@ function BaseController(options){
     }
 
     return router;
-
-    // return {
-    //     Router : function(){
-    //         return router;
-    //     },
-    //     GET : function(){
-    //         console.log(arguments);
-    //         router.get(arguments);
-    //         return this;  
-    //     }
-    // };
 }
 
 module.exports = BaseController

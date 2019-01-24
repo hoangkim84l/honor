@@ -1,11 +1,11 @@
-var Catagory = require('../models/private/catagory.model');
-var CatagoryDAL = require('../dal/catagory.repo');
+
+var CatagoryDAL = require('../dal/catagory.dal');
 
 async function CreateCatagory(catagory){
-	return await CatagoryDAL.CreateCatagory(catagory);
+	return await CatagoryDAL.Create(catagory);
 }
 async function GetCatagory(){
-	return await CatagoryDAL.GetCatagory();
+	return await CatagoryDAL.Get();
 }
 
 module.exports = {

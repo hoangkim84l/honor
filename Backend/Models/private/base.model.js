@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-const BaseSchema = {
+var BaseSchema = {
     createdDate : { type: Date, required: true, default: Date.now },
     lastUpdate : { type: Date, required: true, default: Date.now },
     isDeleted:{type:Boolean,required: false,default:false},
@@ -13,9 +13,10 @@ function BaseModel(){
     
     var collectionName = arguments[0];
     var fields = arguments[1];
-    var schema =  new Schema(Object.assign(BaseSchema,fields));
-   
-    schema.pre('update',function(){
+    
+    var schema =  new Schema(Object.assign(fields,BaseSchema));
+
+    schema.pre('save',function(){
         this.lastUpdate = Date.now(); 
         this.logs.push({
             userId : "DDD",
@@ -23,17 +24,6 @@ function BaseModel(){
             data : this
         });   
     });
-
-    schema.pre('create',function(){
-        this.lastUpdate = Date.now(); 
-        this.logs.push({
-            userId : "DDD",
-            action : "Create",
-            data : this
-        });   
-    });
-
-
 
     return mongoose.model(collectionName, schema);
 }
