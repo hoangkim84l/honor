@@ -11,7 +11,7 @@ var UserModel = new BaseModel("Users",{
 }); 
 
 module.exports = UserModel;
-
+    
 
 
 
