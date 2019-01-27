@@ -1,22 +1,8 @@
-//var createError = require('http-errors');
-var express = require('express');
-// var path = require('path');
-// var cookieParser = require('cookie-parser');
-// var logger = require('morgan');
+
 var bodyParser = require('body-parser');
+var app = require('express')();
+var ErrorProvider = require('./Provider/error-provider');
 
-
-var app = express();
-
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
-// app.use(logger('dev'));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
 //set parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,20 +15,9 @@ db.initialize();
  var routeConfig = require('./controllers/route.config');
  routeConfig.initialize(app);
 
-// // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
-
-// // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
+// error handle
+app.use(ErrorProvider.LogErrorHandle);
+app.use(ErrorProvider.ClientErrorHandle);
+app.use(ErrorProvider.SystemErrorHandle);
 
 module.exports = app;

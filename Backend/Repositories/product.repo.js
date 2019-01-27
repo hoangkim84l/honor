@@ -1,15 +1,7 @@
-var Product = require('../models/private/product.model');
 var ProductDAL = require('../dal/product.dal');
 
-//ở đây sẽ còn vài step nữa nhưng hiện tại anh làm demo
-//nên anh sẽ ko làm chỉ ghi ra cho em tưởng tượng 
-async function CreateProduct(userId, product){
-    // TODO : Dựa vào userId lấy shopId
 
-    // Create new data model
-    // var newProduct = new Product({
-    //     productName :product.productName,  
-    // }); 
+async function CreateProduct(userId, product){
     var newProduct = await ProductDAL.Create(product);
     return newProduct; 
 }
@@ -20,7 +12,7 @@ async function GetProducts(){
 
 //get productDetail by id
 async function GetProductDetail(productName){
-	return await ProductDAL.Get({
+	return await ProductDAL.Find({
         productName : productName
     });
 

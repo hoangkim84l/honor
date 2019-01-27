@@ -1,7 +1,6 @@
 
-var Product = require('../models/private/product.model');
+var Product = require('../Models/private/product.model');
 var BaseDAL = require('./base.dal'); 
-var ProductDAL = new BaseDAL("Product",Product);
-
+var ProductDAL = new BaseDAL(Product);
 
 module.exports = ProductDAL;

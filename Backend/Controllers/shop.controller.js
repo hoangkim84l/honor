@@ -6,7 +6,7 @@ async function GetShop(req, res){
 }
 
 async function CreateShop(req, res){
-	res.send(await ShopRepo.CreateShop("shoptest", req.body));
+	res.send(await ShopRepo.CreateShop(req.body));
 }
 
 let ShopController = new BaseController({
@@ -15,6 +15,6 @@ let ShopController = new BaseController({
 
 ShopController
 	.GET('/', GetShop)
-	.POST('/',CreateShop);
+	.POST('/', CreateShop);
 
 module.exports = ShopController;

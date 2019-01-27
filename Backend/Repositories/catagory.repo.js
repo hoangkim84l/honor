@@ -5,7 +5,7 @@ async function CreateCatagory(catagory){
 	return await CatagoryDAL.Create(catagory);
 }
 async function GetCatagory(){
-	return await CatagoryDAL.Get();
+	return await CatagoryDAL.Find();
 }
 
 module.exports = {

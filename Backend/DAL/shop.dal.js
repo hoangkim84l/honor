@@ -1,17 +1,12 @@
-let Shop = require('../models/private/shop.model');
+var Shop = require('../Models/private/shop.model');
+var BaseDAL = require('./base.dal'); 
 
-async function CreateShop(shop){
-	console.log(shop);
-	return await Shop.create(shop);
-}
-
-async function GetShop(){
-	return await Shop.find();
-}
-
-module.exports = {
-	CreateShop: CreateShop,
-	GetShop: GetShop
-}
-
-
+var ShopDAL = new BaseDAL(Shop,{
+    FindShopByName : async function(shopName){
+        return await Shop.findOne({
+            shopName : shopName,
+            isDeleted : false
+        });
+    }   
+});
+module.exports = ShopDAL;

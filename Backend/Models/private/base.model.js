@@ -16,15 +16,11 @@ function BaseModel(){
     
     var schema =  new Schema(Object.assign(fields,BaseSchema));
 
-    schema.pre('save',function(){
-        this.lastUpdate = Date.now(); 
-        this.logs.push({
-            userId : "DDD",
-            action : "Update",
-            data : this
-        });   
+    schema.pre('save',function(next){
+        this.lastUpdate = Date.now();  
+        next();
     });
-
+    
     return mongoose.model(collectionName, schema);
 }
 

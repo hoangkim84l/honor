@@ -1,37 +1,42 @@
+var mongoose = require('mongoose');
 
-function BaseDAL(functionSuffix,Entity){
-    async function Get(condition){
-        condition = condition || {};
-        return await Entity.find(condition);
+
+function BaseDAL(mongooseEntity,extendDAL){
+    extendDAL = extendDAL || {};
+    async function GetById(id){
+        return await mongooseEntity.findOne({_id :id, isDeleted:false});
     }
 
-    async function Create(newModel){
-        return await Entity.create(newModel);
+    async function Find(condition){
+        condition = condition || {};
+        return await mongooseEntity.find(condition);
+    }
+
+    async function Create(newObject){
+        var newModel = new mongooseEntity(newObject);
+        return await newModel.save();   
     }
     
-    async function Update(id, updateFields){
-        var record = await Get({_id:id});
+    async function Update(id, updatedFields){
+        var record = await GetById({_id:id});
         if(recor == null) throw new Error($`{id} invalid`);
-        record.set(updateFields);
-        await record.save(); 
+        record.set(updatedFields);
+        return await record.save(); 
     }
 
     async function Delete(id){
-        await Entity.update({ _id: id }, { $set: { isDeleted: true }});
+        return await Update(id,{ isDeleted: true });
     }
 
     var baseFunc = {
-        Get:Get,
+        Find:Find,
+        GetById : GetById,
         Create:Create,
         Update:Update,
         Delete:Delete
     };
-    // baseFunc["Get" + functionSuffix] = Get;
-    // baseFunc["Create" + functionSuffix] = Create;
-    // baseFunc["Update" + functionSuffix] = Update;
-    // baseFunc["Delete" + functionSuffix] = Delete;
 
-    return baseFunc;
+    return Object.assign(baseFunc,extendDAL);
 }
 
 module.exports = BaseDAL;

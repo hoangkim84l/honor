@@ -1,10 +1,11 @@
 
 function _initialize(appExpress){
-    appExpress.use('/product',require('./product.controller'));
-    appExpress.use('/catagory',require('./catagory.controller'));
-    appExpress.use('/shop',require('./shop.controller'));
+    appExpress.use('/products',require('./product.controller'));
+    appExpress.use('/catagories',require('./catagory.controller'));
+    appExpress.use('/shops',require('./shop.controller'));
+    appExpress.use('/users',require('./user.controller'));
 }
 
-module.exports = {
+module.exports = {  
     initialize : _initialize
 }

@@ -1,0 +1,21 @@
+{
+    "development": {
+        "id": "development",
+        "port": 3000,
+        "database": "honortest",
+        "secret":"honor-development-is-bad",
+        "defaultPassword" : "honor123"
+    },
+    "staging": {
+        "id": "staging",
+        "port": 8080,
+        "database": "honorstaging",
+        "secret":"honor-staging-is-good"
+    },
+    "production": {
+        "id": "production",
+        "port": 8080,
+        "database": "honor",
+        "secret":"honor-staging-is-perfect"
+    }
+}

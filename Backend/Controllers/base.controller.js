@@ -18,13 +18,19 @@ function BaseController(options){
         })   
     }
 
+    let wrap = fn => (...args) => fn(...args).catch(args[2]); 
+
     router.GET = function(){
-        router.get(arguments[0],arguments[1]);
+        router.get(arguments[0],wrap(async (req, res,next) => {
+            await arguments[1](req, res,next); 
+        }));
         return router;  
     }
 
     router.POST = function(){
-        router.post(arguments[0],arguments[1]);
+        router.post(arguments[0],wrap(async (req, res,next) => {
+            await arguments[1](req, res,next); 
+        }));
         return router;  
     }
 
