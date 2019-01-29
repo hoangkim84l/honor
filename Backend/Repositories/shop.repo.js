@@ -2,7 +2,7 @@ let ShopDAL = require('../dal/shop.dal');
 let UserDAL = require('../dal/user.dal');
 var ErrorProvider = require('../Provider/error-provider');
 var BadRequest = ErrorProvider.BadRequest;
-var ObjectId = require('mongoose').Types.ObjectId
+var ObjectId = require('mongoose').Types.ObjectId;
 
 
 async function ValidShopParam(shopData){
@@ -23,7 +23,6 @@ async function ValidShopParam(shopData){
 		throw new BadRequest ("Shop name is taken");
    
 	let owner = await UserDAL.GetById(shopData.userId);
-	console.log(owner);
 	if(owner == null)
 		throw new BadRequest ("Can't find the owner");
 }

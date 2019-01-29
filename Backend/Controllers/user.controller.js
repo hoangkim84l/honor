@@ -1,22 +1,26 @@
-
-var BaseController = require('./base.controller');
-var UserRepo = require('../repositories/user.repo');
+let BaseController = require('./base.controller');
+let UserRepo = require('../repositories/user.repo');
 
 
 async function GetUsers(req, res){
     res.send(await UserRepo.GetUsers());      
 }
 
+async function GetUserById(req, res){
+    res.send(await UserRepo.GetUserById(req.params.userId));      
+}
+
 async function CreateUser(req, res){
     res.send(await UserRepo.CreateUser(req.body));
 }
 
-var UserController = new BaseController({
+let UserController = new BaseController({
     authentication : true,
 });
 
 UserController
     .GET('/',GetUsers)
-    .POST('/',CreateUser);
+    .POST('/',CreateUser)
+    .GET('/:userId',GetUserById);
 
 module.exports = UserController;

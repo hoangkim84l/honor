@@ -33,8 +33,13 @@ async function GetUsers(){
     return await UserDAL.Find();   
 }
 
+async function GetUserById(userId){
+    return await UserDAL.GetById(userId);
+}
+
 
 module.exports = {
     CreateUser  : CreateUser,
-    GetUsers    : GetUsers
+    GetUsers    : GetUsers,
+    GetUserById : GetUserById
 }
