@@ -1,12 +1,10 @@
 var express = require('express');
 
-// Options properties :
-// 
 function BaseController(options){
     options = options || { };
-    var _ = this;
+
     var router = express.Router();
-     
+
     if(options.authentication){
         var anonymous = options.anonymous || [];
         router.use(function(req, res, next) {
