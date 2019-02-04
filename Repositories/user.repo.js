@@ -50,13 +50,11 @@ async function UpdateUser(userData){
 }
 
 async function GetUsers(){
-    return await UserDAL.Find();   
+    return (await UserDAL.Find()).map(u=>u.mapToSimple());   
 }
 
-async function GetUserDetail(userId){
-    var a = await UserDAL.GetById(userId);
-    console.log(a);
-    return await UserDAL.GetById(userId);
+async function GetUserDetail(userId){ 
+    return (await UserDAL.GetById(userId)).mapToDetail();
 }
 
 
