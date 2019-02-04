@@ -5,7 +5,7 @@ var UserDAL = new BaseDAL(User,{
     FindUserByEmail : async function(email){
         return await User.findOne({
             email:email,
-            isDelete:false
+            isDeleted:false
         });   
     }
 }); 

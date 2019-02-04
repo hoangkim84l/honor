@@ -32,6 +32,13 @@ function BaseController(options){
         return router;  
     }
 
+    router.PUT = function(){
+        router.put(arguments[0],wrap(async (req, res,next) => {
+            await arguments[1](req, res,next); 
+        }));
+        return router;  
+    }
+
     return router;
 }
 
