@@ -7,6 +7,8 @@ module.exports = {
             email : this.email,
             fullName : this.fullName,
             userType : Type.UserType.getValue(this.userType),
+            lastModified : this.lastModified
+            
         }
     },
     mapToDetail : function mapToDetail(){
