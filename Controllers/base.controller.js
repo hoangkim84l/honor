@@ -1,12 +1,10 @@
 var express = require('express');
 
-// Options properties :
-// 
 function BaseController(options){
     options = options || { };
-    var _ = this;
+
     var router = express.Router();
-     
+
     if(options.authentication){
         var anonymous = options.anonymous || [];
         router.use(function(req, res, next) {
@@ -29,6 +27,13 @@ function BaseController(options){
 
     router.POST = function(){
         router.post(arguments[0],wrap(async (req, res,next) => {
+            await arguments[1](req, res,next); 
+        }));
+        return router;  
+    }
+
+    router.PUT = function(){
+        router.put(arguments[0],wrap(async (req, res,next) => {
             await arguments[1](req, res,next); 
         }));
         return router;  

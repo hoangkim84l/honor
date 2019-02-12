@@ -19,7 +19,7 @@ function BaseDAL(mongooseEntity,extendDAL){
     
     async function Update(id, updatedFields){
         var record = await GetById({_id:id});
-        if(recor == null) throw new Error($`{id} invalid`);
+        if(record == null) throw new Error($`{id} invalid`);
         record.set(updatedFields);
         return await record.save(); 
     }

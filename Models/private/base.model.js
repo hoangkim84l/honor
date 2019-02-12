@@ -3,21 +3,26 @@ var Schema = mongoose.Schema;
 
 var BaseSchema = {
     createdDate : { type: Date, required: true, default: Date.now },
-    lastUpdate : { type: Date, required: true, default: Date.now },
+    lastModified : { type: Date, required: true, default: Date.now },
     isDeleted:{type:Boolean,required: false,default:false},
     logs : {type:[],required: true,default:[]},
 }
 
-function BaseModel(){ 
-    if(arguments.length != 2) throw new Error('BaseModel required 2 parameters'); 
+function BaseModel(options){ 
     
-    var collectionName = arguments[0];
-    var fields = arguments[1];
+    if(!options) throw new Error('BaseModel required options, please read document!'); 
+    
+    var collectionName = options.collectionName || "";
+    var fields = options.fields || {};
+    var mapping = options.mapping || {} ;
+
+    if(!collectionName) throw new Error("BaseModel's options require collectionName, please read document!"); 
     
     var schema =  new Schema(Object.assign(fields,BaseSchema));
-
-    schema.pre('save',function(next){
-        this.lastUpdate = Date.now();  
+    Object.assign(schema.methods,mapping);
+    
+    schema.pre('validate',function(next){
+        this.lastModified = Date.now();  
         next();
     });
     
