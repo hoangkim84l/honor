@@ -4,7 +4,7 @@ const BaseModel = require('./base.model');
 
 var CatagoryModel = new BaseModel("Catagories",{
 	catagoryName : {type: String, require: true},
-	parentId : {type:Schema.types.ObjectId}
+	parentId : {type:Schema.Types.ObjectId}
 });
 
 module.exports = CatagoryModel;

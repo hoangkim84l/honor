@@ -4,15 +4,22 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+
 var debug = require('debug')('node:server');
 var http = require('http');
+var type = require('../type');
+var config = require('../config');
 
+// setup configuration
+process.env.NODE_ENV = process.env.NODE_ENV || type.Development;
+global.CONFIG = config[process.env.NODE_ENV] || config.development ;
+
+var app = require('../app');
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(global.CONFIG.port || '3000');
 app.set('port', port);
 
 /**
@@ -87,6 +94,6 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-
-  console.info("Server running at port "+addr.port);
+  console.info(global.CONFIG.id +" server running at port " + addr.port);
+  
 }
