@@ -9,6 +9,7 @@ function BaseDAL(mongooseEntity,extendDAL){
 
     async function Find(condition){
         condition = condition || {};
+        condition.isDeleted = false;
         return await mongooseEntity.find(condition);
     }
 

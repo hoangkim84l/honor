@@ -36,10 +36,15 @@ async function GetParentCatagory(){
 	return await CatagoryDAL.Find({parentId:"null"}); 
 }
 
+async function DeleteCatagory(catagoryId){
+	return await CatagoryDAL.Delete(catagoryId);
+}
+
 module.exports = {	
 	GetCatagory : GetCatagory,
 	CreateCatagory : CreateCatagory,
 	UpdateCatagory : UpdateCatagory,
 	GetCatagoryDetail : GetCatagoryDetail,
 	GetParentCatagory : GetParentCatagory,
+	DeleteCatagory : DeleteCatagory,
 }
