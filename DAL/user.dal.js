@@ -11,4 +11,5 @@ var UserDAL = new BaseDAL(User,{
 }); 
 
 
+
 module.exports = UserDAL;
